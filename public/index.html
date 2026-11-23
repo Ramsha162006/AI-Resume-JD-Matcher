@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATS Resume Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">ATS</span>
+        <div class="brand-text">
+          <h1>Resume &amp; Job Matcher</h1>
+          <p>AI-powered ATS scoring</p>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon-dark">☾</span>
+        <span class="theme-icon-light">☀</span>
+      </button>
+    </header>
+
+    <main class="layout">
+      <section class="primary">
+        <div class="card inputs-card">
+          <h2 class="card-title">Analyze Your Resume</h2>
+          <div class="inputs-grid">
+            <div class="field">
+              <label for="resume">Paste Your Resume Text</label>
+              <textarea id="resume" placeholder="Paste your full resume text here..." rows="12"></textarea>
+              <div class="char-count" id="resumeCount">0 chars</div>
+            </div>
+            <div class="field">
+              <label for="jobDescription">Paste Job Description (JD)</label>
+              <textarea id="jobDescription" placeholder="Paste the job description here..." rows="12"></textarea>
+              <div class="char-count" id="jdCount">0 chars</div>
+            </div>
+          </div>
+          <button id="analyzeBtn" class="primary-btn">
+            <span class="btn-text">Check ATS Match</span>
+            <span class="spinner" hidden></span>
+          </button>
+          <p id="formError" class="form-error" hidden></p>
+        </div>
+
+        <div id="resultsCard" class="card results-card" hidden>
+          <div class="results-header">
+            <h2 class="card-title">Match Results</h2>
+            <div class="score-ring">
+              <svg viewBox="0 0 120 120" class="ring-svg">
+                <circle class="ring-track" cx="60" cy="60" r="52" />
+                <circle class="ring-progress" id="ringProgress" cx="60" cy="60" r="52" />
+              </svg>
+              <div class="score-value">
+                <span id="scoreNumber">0</span><span class="score-pct">%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <div class="results-section">
+            <h3>Matched Skills</h3>
+            <div id="matchedSkills" class="badges"></div>
+          </div>
+
+          <div class="results-section">
+            <h3>Missing Keywords</h3>
+            <div id="missingKeywords" class="badges"></div>
+          </div>
+
+          <div class="results-section">
+            <h3>Suggested Improvements</h3>
+            <ul id="suggestions" class="suggestions-list"></ul>
+          </div>
+        </div>
+
+        <div id="emptyState" class="card empty-state">
+          <div class="empty-icon">🎯</div>
+          <p>Paste your resume and a job description, then run a scan to see your ATS match score.</p>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="card history-card">
+          <div class="history-header">
+            <h2 class="card-title">Recent Scans</h2>
+            <button id="refreshHistory" class="ghost-btn" aria-label="Refresh">↻</button>
+          </div>
+          <div id="historyList" class="history-list">
+            <p class="history-empty">No scans yet.</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
